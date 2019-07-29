@@ -9,10 +9,10 @@ SpaceHipster.Game.prototype = {
         this.game.world.setBounds(0, 0, 1920, 1920);
 
         //background
-        this.background = this.game.add.tileSprite(0, 0, this.game.world.width, this.gane.world.height, 'space');
+        this.background = this.game.add.tileSprite(0, 0, this.game.world.width, this.game.world.height, 'space');
         
         //create player
-        this.player = this.game.add.sprite(this.game.world.centerY, 'playership');
+        this.player = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'playership');
         this.player.scale.setTo(2);
         this.player.animations.add('fly', [0, 1, 2, 3], 5, true);
         this.player.animations.play('fly');
@@ -65,7 +65,7 @@ SpaceHipster.Game.prototype = {
 
         for (var i=0; i < numCollectables; i++) {
             //add sprite
-            collectable = this.collectable.create(this.game.world.randomX, this.game.world.randomY, 'power');
+            collectable = this.collectables.create(this.game.world.randomX, this.game.world.randomY, 'power');
             collectable.animations.add('fly', [0, 1, 2, 3], 5, true);
             collectable.animations.play('fly');
         }
@@ -113,7 +113,7 @@ SpaceHipster.Game.prototype = {
     gameOver: function() {
         //pass it the score as a parameter
         this.game.state.start('MainMenu', true, false, this.playerScore);
-    }
+    },
     collect: function(player, collectable) {
         //play collect sound
         this.collectSound.play();
